@@ -1,8 +1,9 @@
 import frappe
 
-
+@frappe.whitelist()
 def send_invitiation_emais(meeting):
 	meeting = frappe.get_doc("Meeting", meeting)
+	meeting.check_permission("email")
 	
 	if meeting.status == "Planned":
 		frappe.sendmail(
