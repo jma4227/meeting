@@ -29,11 +29,11 @@ class TestMeeting(unittest.TestCase):
 			})
 		meeting.insert()
 		
-		todos = frappe.get_all("ToDo", filters = {
+		todo = frappe.get_all("ToDo", filters = {
 			"reference_type": meeting.doctype,
 			"reference_name": meeting.name,
 			"owner": "test@example.com"
 			})
 		
-		self.assertEquals(todos[0].name, meeting.minutes[0].todo)
-		self.assertEquals(todos[0].description, meeting.minutes[0].description)
+		self.assertEquals(todo[0].name, meeting.minutes[0].todo)
+		self.assertEquals(todo[0].description, meeting.minutes[0].description)
