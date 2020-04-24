@@ -16,7 +16,7 @@ class Meeting(Document):
 			if not attendee.full_name:
 				attendee.full_name = get_full_name(attendee.attendee)
 
-
+@frappe.whitelist()
 def get_full_name(attendee):
 	user = frappe.get_doc("User", attendee)
 	
