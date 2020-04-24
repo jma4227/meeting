@@ -29,7 +29,7 @@ class Meeting(Document):
 				found.append(attendee.attendee)
 				
 	def sync_todos(self):
-		"""Sync 'todo'"""
+		"""Sync ToDos for assignment"""
 		todos_added = [minute.todo for minute in self.minutes if minute.todo]
 		
 		for minute in self.minutes:
@@ -41,7 +41,7 @@ class Meeting(Document):
 						"description": minute.description,
 						"reference_type": self.doctype,
 						"reference_name": self.name,
-					
+						"owner": minute.assigned_to
 						})
 					todo.insert()
 					
