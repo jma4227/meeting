@@ -14,8 +14,8 @@ def send_invitation_emails(meeting):
 			subject = meeting.title,
 			message = meeting.invitation_message,
 			reference_doctype = meeting.doctype,
-			reference_name = meeting.name,
-			as_bulk = True
+			reference_name=meeting.name,
+			# as_bulk=True
 			)
 		
 		meeting.status = "Invitation Sent"
