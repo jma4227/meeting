@@ -39,11 +39,13 @@ class Meeting(Document):
 				if not minute.todo:
 					todo = frappe.get_doc({
 						"doctype" : "Todo",
-						"desription": minute.description,
+						"description": minute.description,
 						"reference_type": self.doctype,
 						"reference_name": self.name
 						})
 					todo.insert()
+					
+					minute.dob_set("todo", todo.name)
 					minute.todo = todo.name
 					
 
