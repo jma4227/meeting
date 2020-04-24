@@ -23,6 +23,22 @@ class Meeting(Document):
 				frappe.throw(_("Attendee {0} entered twice").format(attendee.attendee))
 				
 				found.append(attendee.attendee)
+				
+	def sync_todos(self):
+		todos_added = [minute.todo for minute in self.minutes if minute.todo]
+		
+		for minute in self.minutes:
+			if minute.assigned_to:
+				if not minute.todo:
+					todo = frappe.get_doc({
+						"doctype" : "Todo",
+						"desription": minute.description,
+						"reference_type": self.doctype,
+						"reference_name": self.name
+						})
+					todo.insert()
+					minute.todo = todo.name
+					
 
 
 @frappe.whitelist()
