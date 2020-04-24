@@ -26,7 +26,7 @@ class TestMeeting(unittest.TestCase):
 					"assigned_to": "test@example.com"
 					}
 				]
-			})
+		})
 		meeting.insert()
 		
 		todo = frappe.get_all("ToDo", filters = {
