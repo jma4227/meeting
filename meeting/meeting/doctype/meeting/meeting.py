@@ -33,9 +33,9 @@ class Meeting(Document):
 		todos_added = [minute.todo for minute in self.minutes if minute.todo]
 		
 		for minute in self.minutes:
-			print 'assigned_to', minute.assigned_to
+			# print 'assigned_to', minute.assigned_to
 			if minute.assigned_to:
-				print 'todo', minute.todo
+				# print 'todo', minute.todo
 				if not minute.todo:
 					todo = frappe.get_doc({
 						"doctype" : "Todo",
