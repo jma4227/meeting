@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+from frappe.utils import nowdate, add_days
 
 
 @frappe.whitelist()
@@ -41,6 +42,24 @@ def get_meetings(start, end):
 		0 all_day
 		from `tabMeeting`
 		where `date` between %(start)s and %(end)s""", {
-			"start": start,
-			"end": end
+		"start": start,
+		"end": end
 		}, as_dict = True)
+
+
+def make_orientation_meeting(doc, method):
+	"""Create an Orientation meeting when a new User is added"""
+	meeting = frappe.get_doc({
+		"doctype": "Meeting",
+		"title": "Orientation for {0}".format(doc.first_name),
+		"date": add_days(nowdate(), 1),
+		"from_time": "09:00",
+		"to_time": "09:30",
+		"status": "Planned",
+		"attendees": [{
+			"attendee": doc.name
+			}]
+		})
+	# the System Manager might not have permission to create a Meeting
+	meeting.flags.ignore_permissions = True
+	meeting.insert()
