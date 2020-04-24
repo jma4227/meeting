@@ -41,12 +41,13 @@ class Meeting(Document):
 						"doctype" : "Todo",
 						"description": minute.description,
 						"reference_type": self.doctype,
-						"reference_name": self.name
+						"reference_name": self.name,
+						"owner": minute.assigned_to
 						})
 					todo.insert()
 					
-					minute.dob_set("todo", todo.name)
-					minute.todo = todo.name
+					minute.db_set("todo", todo.name)
+					# minute.todo = todo.name
 					
 
 
