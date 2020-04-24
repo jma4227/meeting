@@ -13,6 +13,10 @@ from frappe.model.document import Document
 
 class Meeting(Document):
 	def validate(self):
+		self.validate_attendees()
+		self.sync_todos()
+		
+	def validate_attendees(self):
 		"""Set missing names and warn if duplicate"""
 		found = []
 		for attendee in self.attendees:
@@ -23,11 +27,9 @@ class Meeting(Document):
 				frappe.throw(_("Attendee {0} entered twice").format(attendee.attendee))
 				
 				found.append(attendee.attendee)
-
-	def on_update(self):
-		self.sync_todos()
-		
+				
 	def sync_todos(self):
+		"""Sync Todos"""
 		todos_added = [minute.todo for minute in self.minutes if minute.todo]
 		
 		for minute in self.minutes:
