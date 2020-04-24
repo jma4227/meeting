@@ -1,0 +1,57 @@
+{
+ "creation": "2020-04-24 11:13:40.566036",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "description",
+  "action",
+  "assigned_to",
+  "complete_by",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Action"
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Assigned To",
+   "options": "User"
+  },
+  {
+   "fieldname": "complete_by",
+   "fieldtype": "Date",
+   "label": "Complete By"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Open\nClosed"
+  }
+ ],
+ "istable": 1,
+ "modified": "2020-04-24 11:50:47.170031",
+ "modified_by": "Administrator",
+ "module": "Meeting",
+ "name": "Meeting Agenda",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
