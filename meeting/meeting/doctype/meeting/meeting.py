@@ -35,14 +35,13 @@ class Meeting(Document):
 		for minute in self.minutes:
 			# print 'assigned_to', minute.assigned_to
 			if minute.assigned_to:
-		
 				if not minute.todo:
 					todo = frappe.get_doc({
-						"doctype" : "Todo",
+						"doctype": "Todo",
 						"description": minute.description,
 						"reference_type": self.doctype,
 						"reference_name": self.name,
-						"owner": minute.assigned_to
+					
 						})
 					todo.insert()
 					
