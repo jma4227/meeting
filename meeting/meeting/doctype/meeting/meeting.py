@@ -29,7 +29,7 @@ class Meeting(Document):
 				found.append(attendee.attendee)
 				
 	def sync_todos(self):
-		"""Sync Todos"""
+		"""Sync 'todo'"""
 		todos_added = [minute.todo for minute in self.minutes if minute.todo]
 		
 		for minute in self.minutes:
@@ -37,7 +37,7 @@ class Meeting(Document):
 			if minute.assigned_to:
 				if not minute.todo:
 					todo = frappe.get_doc({
-						"doctype": "Todo",
+						"doctype": "ToDo",
 						"description": minute.description,
 						"reference_type": self.doctype,
 						"reference_name": self.name,
