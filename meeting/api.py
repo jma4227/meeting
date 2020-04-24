@@ -33,13 +33,13 @@ def get_meetings(start, end):
 		raise frappe.PermissionError
 	
 	return frappe.db.sql("""select
-	 	timestamp(date, from_time) as start,
-		timestamp(date, to_time) as end,
+	 	timestamp(`date`, from_time) as start,
+		timestamp(`date`, to_time) as end,
 		name,
 		title,
 		status
 		from `tabMeeting`
-		where date between %(start)s and %(end)s""", {
-			"from_date": start,
-			"to_date": end
+		where `date` between %(start)s and %(end)s""", {
+			"start": start,
+			"end": end
 		}, as_dict = True)
