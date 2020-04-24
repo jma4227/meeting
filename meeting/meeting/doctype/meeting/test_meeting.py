@@ -23,7 +23,7 @@ class TestMeeting(unittest.TestCase):
 				{
 					"description": "Test Minute 1",
 					"status": "Open",
-					"assigned_to": "test@example.com"
+					"assigned_to": "bcsorms@gmail.com"
 					}
 				]
 		})
