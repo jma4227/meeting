@@ -63,3 +63,5 @@ def make_orientation_meeting(doc, method):
 	# the System Manager might not have permission to create a Meeting
 	meeting.flags.ignore_permissions = True
 	meeting.insert()
+
+	frappe.msgprint(_("Orientation meeting created"))
