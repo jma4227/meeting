@@ -42,7 +42,7 @@ class Meeting(Document):
 						"reference_type": self.doctype,
 						"reference_name": self.name,
 						"owner": minute.assigned_to
-						})
+					})
 					todo.insert()
 					
 					minute.db_set("todo", todo.name)
