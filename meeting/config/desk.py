@@ -13,8 +13,8 @@ def get_data():
 					"type": "doctype",
 					"name": "Meeting",
 					"label": _("Meeting"),
-					"description": _("."),
-					"onboard": 1,
+					"description": _("Prepare agenda, invite users and record minutes"),
+					
 					},
 				]
 			}
