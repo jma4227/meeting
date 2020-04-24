@@ -12,7 +12,7 @@ import frappe
 
 
 class TestMeeting(unittest.TestCase):
-	def test_sync_todo(self):
+	def test_sync_todos(self):
 		meeting = frappe.get_doc({
 			"doctype": "Meeting",
 			"title": "Test Meeting",
