@@ -17,8 +17,10 @@ def send_invitiation_emais(meeting):
 			reference_name = meeting.name,
 			as_bulk = True
 			)
+		
 		meeting.status = "Invitation Sent"
 		meeting.save()
+		
 		frappe.msgprint(_("Invitation Sent"))
 	
 	else:
