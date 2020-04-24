@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 import unittest
+
 import frappe
 
 
@@ -23,17 +24,18 @@ class TestMeeting(unittest.TestCase):
 				{
 					"description": "Test Minute 1",
 					"status": "Open",
-					"assigned_to": "bcsorms@gmail.com"
+					"assigned_to": "test@example.com"
 					}
 				]
-		})
+			})
 		meeting.insert()
 		
 		todo = frappe.get_all("ToDo", filters = {
 			"reference_type": meeting.doctype,
 			"reference_name": meeting.name,
 			"owner": "test@example.com"
-			})
+			},
+			fields = ["name", "description"])
 		
 		self.assertEquals(todo[0].name, meeting.minutes[0].todo)
 		self.assertEquals(todo[0].description, meeting.minutes[0].description)

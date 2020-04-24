@@ -41,7 +41,7 @@ class Meeting(Document):
 						"description": minute.description,
 						"reference_type": self.doctype,
 						"reference_name": self.name,
-						# "owner": minute.assigned_to
+						"owner": minute.assigned_to
 						})
 					todo.insert()
 					
