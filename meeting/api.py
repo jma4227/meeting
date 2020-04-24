@@ -3,7 +3,7 @@ from frappe import _
 
 
 @frappe.whitelist()
-def send_invitiation_emais(meeting):
+def send_invitiation_emails(meeting):
 	meeting = frappe.get_doc("Meeting", meeting)
 	meeting.check_permission("email")
 	
