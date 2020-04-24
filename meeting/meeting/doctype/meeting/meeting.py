@@ -5,6 +5,7 @@
 from __future__ import unicode_literals
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 
@@ -14,6 +15,5 @@ class Meeting(Document):
 		for attendee in self.attendees:
 			if not attendee.full_name:
 				user = frappe.get_doc("User", attendee.attendee)
-				
 				# concantenates by space if it has value
 				attendee.full_name = " ".join(filter(None, [user.first_name, user.middle_name, user.last_name]))
