@@ -5,7 +5,7 @@ frappe.views.calendar["Meeting"] = {
 		"end": "to_date",
 		"id": "name",
 		"title": "title",
-		"docstatus": 1
+		"status" : "status",
 	},
 	options: {
 		header: {
