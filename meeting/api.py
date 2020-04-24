@@ -1,5 +1,5 @@
 import frappe
-
+from frappe import _
 @frappe.whitelist()
 def send_invitiation_emais(meeting):
 	meeting = frappe.get_doc("Meeting", meeting)
@@ -16,3 +16,8 @@ def send_invitiation_emais(meeting):
 			as_bulk = True
 			)
 		meeting.status = "Invitation Sent"
+		meeting.save()
+		frappe.msgprint(_("Invitation Sent"))
+		
+	else:
+		frappe.msgprint(_("Meeting Status must be 'Planned'"))
