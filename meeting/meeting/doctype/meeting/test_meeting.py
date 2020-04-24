@@ -16,7 +16,7 @@ class TestMeeting(unittest.TestCase):
 			"doctype": "Meeting",
 			"title": "Test Meeting",
 			"status": "Planned",
-			"date": "2020-04-22",
+			"date": "2015-01-01",
 			"from_time": "09:00",
 			"to_time": "10:00",
 			"minutes": [
@@ -26,7 +26,7 @@ class TestMeeting(unittest.TestCase):
 					"assigned_to": "test@example.com"
 					}
 				]
-		})
+			})
 		meeting.insert()
 		
 		todo = frappe.get_all("ToDo", filters = {
