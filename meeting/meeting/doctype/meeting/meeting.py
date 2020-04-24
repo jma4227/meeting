@@ -35,7 +35,7 @@ class Meeting(Document):
 		for minute in self.minutes:
 			# print 'assigned_to', minute.assigned_to
 			if minute.assigned_to:
-				# print 'todo', minute.todo
+		
 				if not minute.todo:
 					todo = frappe.get_doc({
 						"doctype" : "Todo",
@@ -47,7 +47,7 @@ class Meeting(Document):
 					todo.insert()
 					
 					minute.db_set("todo", todo.name)
-					# minute.todo = todo.name
+			
 					
 
 

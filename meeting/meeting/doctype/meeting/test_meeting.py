@@ -7,6 +7,7 @@ import unittest
 
 import frappe
 
+
 # test_dependencies = ["User"]
 
 
@@ -16,7 +17,7 @@ class TestMeeting(unittest.TestCase):
 			"doctype": "Meeting",
 			"title": "Test Meeting",
 			"status": "Planned",
-			"date": "2019-04-22",
+			"date": "2020-04-22",
 			"from_time": "09:00",
 			"to_time": "10:00",
 			"minutes": [
@@ -29,7 +30,7 @@ class TestMeeting(unittest.TestCase):
 			})
 		meeting.insert()
 		
-		todo = frappe.get_list("ToDo", filters = {
+		todo = frappe.get_all("ToDo", filters = {
 			"reference_type": meeting.doctype,
 			"reference_name": meeting.name,
 			"owner": "test@example.com"
