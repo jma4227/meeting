@@ -7,6 +7,8 @@ from __future__ import unicode_literals
 import frappe
 from frappe import _
 from frappe.model.document import Document
+
+
 # test
 
 class Meeting(Document):
@@ -16,12 +18,12 @@ class Meeting(Document):
 		for attendee in self.attendees:
 			if not attendee.full_name:
 				attendee.full_name = get_full_name(attendee.attendee)
-				
+			
 			if attendee.attendee in found:
 				frappe.throw(_("Attendee {0} entered twice").format(attendee.attendee))
 				
 				found.append(attendee.attendee)
-			
+
 
 @frappe.whitelist()
 def get_full_name(attendee):
