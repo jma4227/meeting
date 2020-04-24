@@ -28,7 +28,7 @@ def send_invitation_emails(meeting):
 
 
 @frappe.whitelist()
-def get_meetings(from_date, to_date):
+def get_meetings(start, end):
 	if not frappe.has_permission("Meeting", "read"):
 		raise frappe.PermissionError
 	
