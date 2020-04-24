@@ -7,6 +7,8 @@ import unittest
 
 import frappe
 
+# test_dependencies = ["User"]
+
 
 class TestMeeting(unittest.TestCase):
 	def test_sync_todos(self):
