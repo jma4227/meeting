@@ -41,7 +41,17 @@ class TestMeeting(unittest.TestCase):
 		meeting.reload()
 		self.assertEquals(meeting.minutes[0].status, "Closed")
 		self.assertFalse(meeting.minutes[0].todo)
-
+	
+	def test_sync_todos_on_delete_todo(self):
+		meeting = make_meeting()
+		
+		todos = get_todos(meeting)
+		todo = frappe.get_doc("ToDo", todos[0].name)
+		todo.delete()
+		
+		meeting.reload()
+		self.assertEquals(meeting.minutes[0].status, "Closed")
+		self.assertFalse(meeting.minutes[0].todo)
 
 def make_meeting():
 	meeting = frappe.get_doc({
