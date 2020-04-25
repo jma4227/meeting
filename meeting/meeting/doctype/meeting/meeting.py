@@ -57,10 +57,13 @@ class Meeting(Document):
 					})
 					todo.insert()
 					# set value in the database for
-					minute.db_set("todo", todo.name)
+					minute.db_set("todo", todo.name, update_modified = False)
+					
 			#  removes todo from associated minute if todo is deleted
+				else:
+					todos_added.remove(minute.todo)
 			else:
-				todos_added.remove(minute.todo)
+				minute.db_set("todo", None, update_modified = False)
 		
 		for todo in todos_added:
 			# remove closed or old todo
