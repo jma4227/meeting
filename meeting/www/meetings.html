@@ -3,7 +3,7 @@
 
 	<ul class="list-unstyled meetings-list">
 		{% for meeting in meetings %}
-		<a href="/meeting/{{ meeting.page_name }}">
+		<a href="/meetings/{{ meeting.page_name }}">
 			<li>
 				{{ meeting.title }}<br>
 				<span class="text-muted">{{ frappe.format_date(meeting.date) }}: {{ meeting.from_time }} to {{ meeting.to_time }}</span>
