@@ -36,7 +36,7 @@ class Meeting(Document):
 		todos_added = [ todo.name for todo in
 						frappe.get_all("ToDo",
 									   filters = {
-										   "reference_type": self_doctype,
+										   "reference_type": self.doctype,
 										   "reference_name": self.name,
 										   "assigned_by": ""
 									   })
