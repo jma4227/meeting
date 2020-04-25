@@ -17,7 +17,7 @@ def send_invitation_emails(meeting):
 			reference_doctype = meeting.doctype,
 			reference_name = meeting.name,
 			# as_bulk=True
-			)
+		)
 		
 		meeting.status = "Invitation Sent"
 		meeting.save()
@@ -43,25 +43,39 @@ def get_meetings(start, end):
 		from `tabMeeting`
 		where `date` between %(start)s and %(end)s""", {
 		"start": start,
-		"end": end
-		}, as_dict = True)
+		"end"  : end
+	}, as_dict = True)
 
 
 def make_orientation_meeting(doc, method):
 	"""Create an Orientation meeting when a new User is added"""
 	meeting = frappe.get_doc({
-		"doctype": "Meeting",
-		"title": "Orientation for {0}".format(doc.first_name),
-		"date": add_days(nowdate(), 1),
+		"doctype"  : "Meeting",
+		"title"    : "Orientation for {0}".format(doc.first_name),
+		"date"     : add_days(nowdate(), 1),
 		"from_time": "09:00",
-		"to_time": "09:30",
-		"status": "Planned",
+		"to_time"  : "09:30",
+		"status"   : "Planned",
 		"attendees": [{
 			"attendee": doc.name
-			}]
-		})
+		}]
+	})
 	# the System Manager might not have permission to create a Meeting
 	meeting.flags.ignore_permissions = True
 	meeting.insert()
-
+	
 	frappe.msgprint(_("Orientation meeting created"))
+
+
+def update_minute_status(doc, method = None):
+	"""Update minute status to Closed if ToDos is closed or deleted"""
+	if doc.reference_type != "Meeting" or doc.flags.from_meeting:
+		return
+	
+	if method == "on_trash" or doc.status == "Closed":
+		# retrieves the doc with reference_type and reference_name
+		meeting = frappe.get_doc(doc.reference_type, doc.reference_name)
+		for minute in meeting.minutes:
+			if minute.todo == doc.name:
+				minute.db_set("todo", None, update_modified = False)
+				minute.db_set("status", "Closed", update_modified = False)

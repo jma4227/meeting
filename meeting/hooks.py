@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from . import __version__ as app_version
 
 app_name = "meeting"
 app_title = "Meeting"
@@ -79,10 +78,13 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 doc_events = {
-	"User": {
-			"after_insert": "meeting.api.make_orientation_meeting"
+		"User": {
+				"after_insert": "meeting.api.make_orientation_meeting"
+		},
+		"ToDo": {
+				"on_update": "meeting.api.update_minute_status"
 		}
-	}
+}
 # doc_events = {
 # 	"*": {
 # 		"on_update": "method",
@@ -130,4 +132,3 @@ doc_events = {
 # override_doctype_dashboards = {
 # 	"Task": "meeting.task.get_dashboard_data"
 # }
-

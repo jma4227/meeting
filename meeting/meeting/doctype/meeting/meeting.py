@@ -12,15 +12,15 @@ from frappe.model.document import Document
 # test
 
 class Meeting(Document):
-	def validate( self ):
+	def validate(self):
 		self.validate_attendees()
 	
-	def on_update( self ):
+	def on_update(self):
 		self.sync_todos()
 	
-	def validate_attendees( self ):
+	def validate_attendees(self):
 		"""Set missing names and warn if duplicate"""
-		found = [ ]
+		found = []
 		for attendee in self.attendees:
 			if not attendee.full_name:
 				attendee.full_name = get_full_name(attendee.attendee)
@@ -30,17 +30,17 @@ class Meeting(Document):
 				
 				found.append(attendee.attendee)
 	
-	def sync_todos( self ):
+	def sync_todos(self):
 		"""Sync ToDos for assignment"""
-		# todos_added = [minute.todo for minute in self.minutes if minute.todo]
-		todos_added = [ todo.name for todo in
-						frappe.get_all("ToDo",
-									   filters = {
-										   "reference_type": self.doctype,
-										   "reference_name": self.name,
-										   "assigned_by": ""
-									   })
-						]
+		
+		todos_added = [todo.name for todo in
+					   frappe.get_all("ToDo",
+									  filters = {
+										  "reference_type": self.doctype,
+										  "reference_name": self.name,
+										  "assigned_by"   : ""
+									  })
+					   ]
 		
 		# loop through child table minutes
 		for minute in self.minutes:
@@ -49,30 +49,32 @@ class Meeting(Document):
 				# adds todo to open minute if it doesn't exist
 				if not minute.todo:
 					todo = frappe.get_doc({
-						"doctype": "ToDo",
-						"description": minute.description,
+						"doctype"       : "ToDo",
+						"description"   : minute.description,
 						"reference_type": self.doctype,
 						"reference_name": self.name,
-						"owner": minute.assigned_to
+						"owner"         : minute.assigned_to
 					})
 					todo.insert()
 					# set value in the database for
 					minute.db_set("todo", todo.name, update_modified = False)
-					
-			#  removes todo from associated minute if todo is deleted
+				
+				#  removes todo from associated minute if todo is deleted
 				else:
 					todos_added.remove(minute.todo)
 			else:
 				minute.db_set("todo", None, update_modified = False)
 		
 		for todo in todos_added:
-			# remove closed or old todo
-			frappe.delete_doc("ToDo", todo)
+			# remove closed or old todos
+			todo = frappe.get_doc("ToDo", todo)
+			todo.flags.from_meeting = True
+			todo.delete()
 
 
 @frappe.whitelist()
-def get_full_name( attendee ):
+def get_full_name(attendee):
 	user = frappe.get_doc("User", attendee)
 	
 	# concantenates by space if it has value
-	return " ".join(filter(None, [ user.first_name, user.middle_name, user.last_name ]))
+	return " ".join(filter(None, [user.first_name, user.middle_name, user.last_name]))
