@@ -1,4 +1,4 @@
-{% macro render_meeting(meeting) %}
+{% macro render_meetings(meeting) %}
     {% if meetings %}
 
         <ul class="list-unstyled meetings-list">
@@ -22,10 +22,10 @@
 
 <h2>Planned Meetings</h2>
 
-{{ render_meeting(planned_meetings) }}
+{{ render_meetings(planned_meetings) }}
 
 <hr>
 
 <h2>Past Meetings</h2>
 
-{{ render_meeting(past_meetings) }}
+{{ render_meetings(past_meetings) }}
