@@ -12,8 +12,7 @@ from frappe.website.website_generator import WebsiteGenerator
 
 class Meeting(WebsiteGenerator):
 	website = frappe._dict(
-		template = "templates/generators/meeting.html",
-	
+		template = "templates/generators/meeting.html"
 	)
 	
 	def validate(self):
