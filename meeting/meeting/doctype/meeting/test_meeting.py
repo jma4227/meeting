@@ -53,6 +53,7 @@ class TestMeeting(unittest.TestCase):
 		self.assertEquals(meeting.minutes[0].status, "Closed")
 		self.assertFalse(meeting.minutes[0].todo)
 
+
 def make_meeting():
 	meeting = frappe.get_doc({
 		"doctype"  : "Meeting",
