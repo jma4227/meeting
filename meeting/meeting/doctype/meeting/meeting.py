@@ -75,6 +75,9 @@ class Meeting(WebsiteGenerator):
 			todo = frappe.get_doc("ToDo", todo)
 			todo.flags.from_meeting = True
 			todo.delete()
+	
+	def get_context(self, context):
+		context.parents = [{"name": "meeting", "title": "Meeting"}]
 
 
 @frappe.whitelist()
