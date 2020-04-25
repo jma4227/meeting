@@ -24,7 +24,7 @@
     <hr>
     <h2>Attendees</h2>
     <ol>
-        {% for attendees in doc.attendees % }
+        {% for attendees in doc.attendees %}
         <li>
             {{ attendee.full_name }} {% if attendee.accepted %} <i class = "icon icon-ok"></i> {% endif %}
         </li>
