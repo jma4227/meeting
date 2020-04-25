@@ -10,8 +10,6 @@ from frappe.model.document import Document
 from frappe.website.website_generator import WebsiteGenerator
 
 
-# test
-
 class Meeting(WebsiteGenerator):
 	website = frappe._dict(
 		template = "templates/generators/meeting.html",
