@@ -78,12 +78,13 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 doc_events = {
-		"User": {
-				"after_insert": "meeting.api.make_orientation_meeting"
-		},
-		"ToDo": {
-				"on_update": "meeting.api.update_minute_status"
-		},
+	"User": {
+		"after_insert": "meeting.api.make_orientation_meeting"
+	},
+	"ToDo": {
+		"on_update": "meeting.api.update_minute_status",
+		"on_trash" : "meeting.api.update_minute_status"
+	},
 }
 # doc_events = {
 # 	"*": {
