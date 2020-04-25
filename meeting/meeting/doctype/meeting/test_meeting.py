@@ -30,6 +30,7 @@ class TestMeeting(unittest.TestCase):
 		
 		self.assertEquals(len(todos), 0)
 
+
 def make_meeting():
 	meeting = frappe.get_doc({
 			"doctype"  : "Meeting",
@@ -47,6 +48,7 @@ def make_meeting():
 			]
 	})
 	meeting.insert()
+	return meeting
 
 
 def get_todos( meeting ):
