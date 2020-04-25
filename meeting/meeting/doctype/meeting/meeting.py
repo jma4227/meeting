@@ -77,7 +77,7 @@ class Meeting(WebsiteGenerator):
 			todo.delete()
 	
 	def get_context(self, context):
-		context.parents = [{"name": "meeting", "title": "Meeting"}]
+		context.parents = [{"name": "meetings", "title": "Meetings"}]
 
 
 @frappe.whitelist()
