@@ -17,7 +17,6 @@ class Meeting(WebsiteGenerator):
 	
 	def validate(self):
 		self.page_name = self.name.lower()
-		
 		self.validate_attendees()
 	
 	def on_update(self):
