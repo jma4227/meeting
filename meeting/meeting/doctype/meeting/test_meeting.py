@@ -23,7 +23,7 @@ class TestMeeting(unittest.TestCase):
 	def test_sync_todos_remove( self ):
 		meeting = make_meeting()
 		
-		meeting.mionutes[ 0 ].status = "Closed"
+		meeting.minutes[ 0 ].status = "Closed"
 		meeting.save()
 		
 		todos = get_todos(meeting)
