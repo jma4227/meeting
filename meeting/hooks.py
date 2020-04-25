@@ -83,7 +83,7 @@ doc_events = {
 		},
 		"ToDo": {
 				"on_update": "meeting.api.update_minute_status"
-		}
+		},
 }
 # doc_events = {
 # 	"*": {

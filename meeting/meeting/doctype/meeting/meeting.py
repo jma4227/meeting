@@ -32,7 +32,6 @@ class Meeting(Document):
 	
 	def sync_todos(self):
 		"""Sync ToDos for assignment"""
-		
 		todos_added = [todo.name for todo in
 					   frappe.get_all("ToDo",
 									  filters = {
